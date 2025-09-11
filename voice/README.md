@@ -1,1 +1,1 @@
-# Voice
+Download the voice pronunciation files and ensure they are stored in the designated `voice` folder within the project directory. This folder will serve as the centralized location for organizing and accessing all voice pronunciation assets. Make sure to follow the correct storage structure and naming conventions to maintain consistency and facilitate efficient usage of these files in the project.
