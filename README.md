@@ -6,34 +6,14 @@ umutesacodeX is an intelligent chatbot system that represent Umutesa, featuring 
 
 ## Features
 
-### **1. Multi-Modal Conversation Handling**
-- Supports **seven distinct interaction styles** for seamless and intuitive communication.
-- Enables dynamic switching between interaction modes based on user preferences or context.
-
-### **2. Dynamic Knowledge Base**
-- Built with a **RAG (Retrieval-Augmented Generation)**-based context-aware knowledge base.
-
-### **3. Advanced Speech Integration**
-- Fully integrated **speech-to-text** and **text-to-speech** capabilities.
-
-### **4. Responsive Web Interface**
-- Modern and accessible front-end design built using **HTML, CSS, and JavaScript**.
-
-### **5. Multi-Input and Multi-Output**
-- **Input Options**:
-  - Text-based input.
-  - Audio-based input (speech recognition).
-    
-- **Output Options**:
-  - **Text**: Clear and concise responses.
-  - **Tables**: Tabular data for structured outputs.
-  - **Images**: Rich media support for context-specific visuals.
-  - **Audio**: Spoken responses with text-to-speech.
-  - **References**: Proper citations alongside generated content.
-
-### **6. Cultural Sensitivity**
-- **Pronunciation Features**:
-  - Handles proper name pronunciation
+| **Feature**                     | **Description**                                                                                                    |
+|----------------------------------|--------------------------------------------------------------------------------------------------------------------|
+| **1. Multi-Modal Conversation Handling** | - Supports **seven distinct interaction styles** for seamless and intuitive communication.<br> - Enables dynamic switching between interaction modes based on user preferences or context. |
+| **2. Dynamic Knowledge Base**   | - Built with a **RAG (Retrieval-Augmented Generation)**-based context-aware knowledge base.                        |
+| **3. Advanced Speech Integration** | - Fully integrated **speech-to-text** and **text-to-speech** capabilities.                                        |
+| **4. Responsive Web Interface** | - Modern and accessible front-end design built using **HTML, CSS, and JavaScript**.                                |
+| **5. Multi-Input and Multi-Output** | **Input Options**:<br> - Text-based input.<br> - Audio-based input (speech recognition).<br><br> **Output Options**:<br> - **Text**: Clear and concise responses.<br> - **Tables**: Tabular data for structured outputs.<br> - **Images**: Rich media support for context-specific visuals.<br> - **Audio**: Spoken responses with text-to-speech.<br> - **References**: Proper citations alongside generated content. |
+| **6. Cultural Sensitivity**     | - **Pronunciation Features**:<br>   - Handles proper name pronunciation.                                           |
 
 ![AiAgent Demo](images/demo.gif)
 
