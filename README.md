@@ -18,7 +18,7 @@ umutesacodeX is an intelligent chatbot system that represent Umutesa, featuring 
 ![AiAgent Demo](images/demo.gif)
 
 ## Full Video
-Check out the full video: [My YouTube Playlists](https://www.youtube.com/@umutesa/playlists)
+Check out the full video: [My YouTube Playlists](https://youtu.be/sGA5cZxThPM?si=XhxFkB1gPODzGDIt)
 
 ## Detailed System Architecture
 
