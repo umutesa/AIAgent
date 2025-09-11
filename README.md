@@ -17,6 +17,9 @@ umutesacodeX is an intelligent chatbot system that represent Umutesa, featuring 
 
 ![AiAgent Demo](images/demo.gif)
 
+## Full Video
+Check out the full video: [My YouTube Playlists](https://www.youtube.com/@umutesa/playlists)
+
 ## Detailed System Architecture
 
 ### Audio Processing Architecture
@@ -145,7 +148,6 @@ Formatted Response ──┬──▶ Text Display ──▶ Markdown Rendering
 | **Fast Facts** | Quick, bullet-point format | Rapid information delivery |
 | **Humble Brag** | Confident self-promotion | Showcasing achievements |
 | **Skills** | Professional analysis tables | Technical skill assessment |
-
 
 
 ## Prerequisites
