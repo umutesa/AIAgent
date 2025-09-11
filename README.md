@@ -12,23 +12,20 @@ umutesacodeX is an intelligent chatbot system that represent Umutesa, featuring 
 
 ### **2. Dynamic Knowledge Base**
 - Built with a **RAG (Retrieval-Augmented Generation)**-based context-aware knowledge base.
-- Ensures accurate, up-to-date, and contextually relevant responses.
 
 ### **3. Advanced Speech Integration**
 - Fully integrated **speech-to-text** and **text-to-speech** capabilities.
-- Provides natural and expressive audio interactions for enhanced accessibility.
 
 ### **4. Responsive Web Interface**
 - Modern and accessible front-end design built using **HTML, CSS, and JavaScript**.
-- Fully responsive layout optimized for both desktop and mobile devices.
 
 ### **5. Multi-Input and Multi-Output**
 - **Input Options**:
   - Text-based input.
   - Audio-based input (speech recognition).
+    
 - **Output Options**:
   - **Text**: Clear and concise responses.
-  - **Graphs**: Visual data representation.
   - **Tables**: Tabular data for structured outputs.
   - **Images**: Rich media support for context-specific visuals.
   - **Audio**: Spoken responses with text-to-speech.
@@ -36,8 +33,7 @@ umutesacodeX is an intelligent chatbot system that represent Umutesa, featuring 
 
 ### **6. Cultural Sensitivity**
 - **Pronunciation Features**:
-  - Handles proper name pronunciation using advanced phonetic algorithms.
-  - Includes localized pronunciation support for diverse cultural contexts.
+  - Handles proper name pronunciation
 
 ![AiAgent Demo](images/demo.gif)
 
