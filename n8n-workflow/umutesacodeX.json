@@ -1,0 +1,1057 @@
+{
+  "name": "umutesacodeX",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -4336,
+        304
+      ],
+      "id": "579e37b2-4762-4858-a52a-a61cb0fc6fbc",
+      "name": "When clicking 'Execute workflow'"
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "returnAll": true,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "1NtYJfbKmZCoAi4bfwIMvoGnLK4DqUOZ6",
+            "mode": "list",
+            "cachedResultName": "umutesaCodeX",
+            "cachedResultUrl": "https://drive.google.com/drive/folders/1NtYJfbKmZCoAi4bfwIMvoGnLK4DqUOZ6"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -4112,
+        304
+      ],
+      "id": "d4f27f7c-3958-467b-8d10-4b9d7ca9ae59",
+      "name": "Search files and folders",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "Y7T9HafAyxbdNdWT",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -3888,
+        304
+      ],
+      "id": "f91ffe02-ac49-4b5b-9dd0-12ab20345818",
+      "name": "Download file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "Y7T9HafAyxbdNdWT",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -3664,
+        528
+      ],
+      "id": "e1ea9bb4-04bd-494d-a817-eab4a79225bc",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "R5nTzvQ6YdovXraD",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "textSplittingMode": "custom",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        -3536,
+        528
+      ],
+      "id": "dde71cf4-7263-4c25-aaae-79f61a7675ae",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        -3200,
+        672
+      ],
+      "id": "c5526895-f0cc-46c7-a2eb-e5eb35ac975c",
+      "name": "Recursive Character Text Splitter"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "indexspace",
+          "mode": "list",
+          "cachedResultName": "indexspace"
+        },
+        "embeddingBatchSize": 1536,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.3,
+      "position": [
+        -3632,
+        304
+      ],
+      "id": "2742d2ce-b280-4c17-8733-be1209680014",
+      "name": "Pinecone Vector Store1",
+      "credentials": {
+        "pineconeApi": {
+          "id": "jToHIU3iq0Juy1xn",
+          "name": "PineconeApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -3248,
+        -784
+      ],
+      "id": "4af66567-1d63-4adc-953a-781cf20f11d2",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "R5nTzvQ6YdovXraD",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.body.sessionId || $json.body.message }}",
+        "contextWindowLength": 50
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -3088,
+        -768
+      ],
+      "id": "e0a2d0d1-03c7-40cc-b89e-c042b285764b",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -2864,
+        -368
+      ],
+      "id": "6e678711-0875-4dbe-b722-a53f16ab0b4f",
+      "name": "Embeddings OpenAI1",
+      "credentials": {
+        "openAiApi": {
+          "id": "R5nTzvQ6YdovXraD",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "indexspace",
+          "mode": "list",
+          "cachedResultName": "indexspace"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.3,
+      "position": [
+        -2928,
+        -560
+      ],
+      "id": "c1d226ea-deca-4fb9-9751-cd13275486f0",
+      "name": "Pinecone Vector Store",
+      "credentials": {
+        "pineconeApi": {
+          "id": "jToHIU3iq0Juy1xn",
+          "name": "PineconeApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "topK": 5
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
+      "typeVersion": 1.1,
+      "position": [
+        -2880,
+        -752
+      ],
+      "id": "b30bf1f6-29ae-4c74-800e-4b78f01c08a6",
+      "name": "Answer questions with a vector store"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -2624,
+        -560
+      ],
+      "id": "a799ecaf-caee-475a-ab23-0165f2f34567",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "R5nTzvQ6YdovXraD",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "=POST",
+        "path": "chat",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -4336,
+        -576
+      ],
+      "id": "d6f5d1f7-d65a-4b6f-860a-54d35070d510",
+      "name": "Chatbot Webhook",
+      "webhookId": "ad2419a1-e763-4948-b10e-ae8d6d32fab6",
+      "alwaysOutputData": false,
+      "executeOnce": false,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.body.message }}",
+              "operation": "isNotEmpty"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -4112,
+        -576
+      ],
+      "id": "e4e2d034-95b7-450e-993d-3bd28c7a1ee6",
+      "name": "Validate Message"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "Error with System. Please try again.",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        -4112,
+        -160
+      ],
+      "id": "97b87fed-b738-48b3-af08-00abfe09f577",
+      "name": "Error Response"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"output\": $json.output } }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        -2400,
+        -1024
+      ],
+      "id": "0ed0ebfc-5960-4cc3-9669-21c8607eff82",
+      "name": "Success Response",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "d4f2f38c-75dc-479b-b053-c81c316855b5",
+      "name": "Interview Mode Setup",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        -3664,
+        -704
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "aa00ebbd-60b3-417b-9f40-37d20bb6199e",
+      "name": "Humble Brag Mode Setup",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        -3664,
+        -1280
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.mode }}",
+                    "rightValue": "=interview",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "interview-mode"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "interview"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.mode }}",
+                    "rightValue": "storytelling",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "storytelling-mode"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "storytelling"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.mode }}",
+                    "rightValue": "fast_facts",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "fast-facts-mode"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "fast_facts"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.mode }}",
+                    "rightValue": "humble_brag",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "humble-brag-mode"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "humble_brag"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "id": "69f834f1-6d9f-422e-9ac5-7e5d8c5bac05",
+                    "leftValue": "={{ $json.body.mode }}",
+                    "rightValue": "default",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "default"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "id": "8f075b43-897c-4dfb-9abb-ea76320e33c0",
+                    "leftValue": "={{ $json.body.mode }}",
+                    "rightValue": "story_images",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "story_images"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "id": "663293b3-a3e4-43fd-bc8f-c395ca151eae",
+                    "leftValue": "={{ $json.body.mode }}",
+                    "rightValue": "skills",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "skills"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "4f9ae076-a238-4da9-90a2-74d6662bc88f",
+      "name": "Mode Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [
+        -4192,
+        -1136
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "c859cee1-ef84-4786-9629-494ae711c1fb",
+      "name": "Storytelling Mode Setup",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        -3664,
+        -896
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "2fe93b70-32cc-4a7b-af09-eb38340dcedb",
+      "name": "Fast Facts Mode Setup",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        -3664,
+        -1088
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "a95716a6-3fb8-46b8-8cf9-15bf712742ff",
+      "name": "Default Mode Setup",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        -3664,
+        -512
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "0a8de4ad-fff1-4fb0-8fd3-5b9187ba1175",
+      "name": "Format Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        -2608,
+        -1024
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "2a772842-633b-4807-ad68-dd079ca575fe",
+      "name": "Skills Mode",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        -3664,
+        -320
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "51aa916d-8bfb-4fef-847f-ad1a1d4235ce",
+      "name": "Story Telling Visual Mode",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        -3664,
+        -128
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# Database",
+        "height": 608,
+        "width": 1520
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -4496,
+        240
+      ],
+      "id": "92c93c9c-9990-4e5b-a979-bd8be26b4243",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "# AI Agent\n",
+        "height": 240,
+        "width": 352,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -3280,
+        -1088
+      ],
+      "typeVersion": 1,
+      "id": "06b75e5e-adb4-4467-a9e9-b9f68d666056",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "# Output",
+        "height": 224,
+        "width": 496,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2736,
+        -1088
+      ],
+      "typeVersion": 1,
+      "id": "03e7d5b6-e1a0-4fa8-a052-3e32441fd65b",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "# Input",
+        "height": 256,
+        "width": 432,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -4384,
+        -640
+      ],
+      "typeVersion": 1,
+      "id": "49617f42-c466-4998-bd4d-b0a3ef3fb9e9",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "# README Guide \n\n\n# Umutesa AI Chatbot- Workbook Guide\n\n## Overview\nThis n8n workflow creates a personalized AI chatbot with Umutesa, an engineer with interests in software development, machine learning, and robotics. The assistant supports multiple conversation modes and uses vector storage for knowledge retrieval.\n\n## Architecture Overview\n\n```\nWebhook → Validation → Mode Switch → AI Agent → Response\n    ↓\nDocument Processing → Vector Storage (Pinecone)\n```\n\n## Components Breakdown\n\n### 1. Input Layer\n- **Chatbot Webhook**: Receives POST requests at `/chat` endpoint\n- **Validate Message**: Ensures message is not empty before processing\n\n### 2. Mode Processing\nThe workflow supports 7 different conversation modes:\n\n| Mode | Description | Response Style |\n|------|-------------|----------------|\n| `default` | Balanced, friendly responses | Standard conversational |\n| `interview` | Professional interview prep | Concise, professional |\n| `storytelling` | Narrative responses | Longer, reflective |\n| `storytelling_images` | Visual storytelling | Narrative with image support |\n| `fast_facts` | Quick information | Bullet points, TL;DR |\n| `humble_brag` | Confident self-promotion | Confident but grounded |\n| `skills_analysis` | Technical skill assessment | Charts and visualizations |\n\n### 3. AI Processing Layer\n- **OpenAI Chat Model**: GPT-4o-mini for conversation\n- **Simple Memory**: Maintains conversation context (50 messages window)\n- **Vector Store Tool**: Retrieves relevant information from knowledge base\n\n### 4. Knowledge Base\n- **Google Drive Integration**: Automatically syncs documents from specified folder\n- **Document Processing**: Splits documents using recursive character text splitter\n- **Pinecone Vector Store**: Stores embeddings for semantic search\n- **OpenAI Embeddings**: Creates vector representations of documents\n\n### 5. Output Layer\n- **Format Response**: Structures the response with metadata\n- **Success Response**: Returns JSON with output, sessionId, mode, and timestamp\n\n\n### Request Format\n```json\nPOST /chat\n{\n  \"body\": {\n    \"message\": \"Your question here\",\n    \"mode\": \"default\",\n    \"sessionId\": \"unique-session-id\"\n  }\n}\n```\n\n### Response Format\n```json\n{\n  \"output\": \"AI response text\",\n  \"sessionId\": \"unique-session-id\", \n  \"mode\": \"default\",\n  \"timestamp\": \"2025-01-01T12:00:00.000Z\"\n}\n```\n\n\n\n## Document Management\n\n### Adding New Documents\n1. Upload files to the specified Google Drive folder\n2. Execute the \"When clicking 'Execute workflow'\" trigger\n3. Documents are automatically processed and added to vector store\n\n### Supported File Types\n- PDF documents\n- Text files\n- Word documents\n- Any format supported by n8n's Document Loader\n\n### Processing Pipeline\n1. **Download**: Files retrieved from Google Drive\n2. **Split**: Documents chunked using recursive character splitter\n3. **Embed**: Text converted to vector embeddings\n4. **Store**: Embeddings saved to Pinecone index\n\n## Session Management\n- Sessions identified by `sessionId` parameter\n- Conversation history maintained for up to 50 messages\n- Multiple concurrent sessions supported\n\n## Error Handling\n- Invalid requests return \"Error with System. Please try again.\"\n- Webhook validation ensures message is present\n- Graceful fallbacks for AI processing errors\n\n## Performance Considerations\n- Vector search limited to top 5 results for efficiency\n- Embedding batch size set to 1536 for optimal processing\n- Memory window limited to 50 messages to manage context\n\n\n\n\n\n",
+        "height": 2560,
+        "width": 1136,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -6064,
+        -1600
+      ],
+      "typeVersion": 1,
+      "id": "cd27c964-bab6-4dc4-9c9d-700d9b0a1f51",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Question: {{ $json.body.message }}\nMode: {{ $json.body.mode }}",
+        "options": {
+          "systemMessage": "=function getMode(mode) {\n  switch(mode) {\n    case 'interview':\n      return \"Interview Mode: Answers should be concise, professional, and informative.\";\n    \n    case 'storytelling':\n      return \"Storytelling Mode: Answers should be longer, reflective, and narrative in tone. Tell descriptive stories based on Umutesa's interests and passion. No images for this mode.\";\n    \n    case 'story_images':\n      return `Storytelling with Images Mode: Answers should be longer, reflective, and narrative in tone. Tell descriptive stories based on Umutesa's interests, hobbies, career, education and passion. Include visual content using ONLY verified, existing image sources.\n\nAPPROVED IMAGE SOURCES (guaranteed to work):\n- Umutesa at university within African Robotics Unit: https://raw.githubusercontent.com/umutesa/Codex/refs/heads/main/images/1745785550879.jpeg\n- Nature and Outdoor: https://secretcapetown.co.za/wp-content/uploads/2022/05/Things-To-Do-In-Cape-Town-On-The-Weekend-6.png\n- Umutesa playing golf: https://raw.githubusercontent.com/umutesa/Codex/refs/heads/main/images/20240209_150932.jpg\n- University (UCT): https://www.news.uct.ac.za/cache/images/archive/dailynews/2015/800x0/normal/UCT_Panorama_700.jpg\n- Umutesa at a conference: https://raw.githubusercontent.com/umutesa/Codex/refs/heads/main/images/IMG-20230519-WA0009.jpg\n- Umutesa with friends: https://raw.githubusercontent.com/umutesa/Codex/refs/heads/main/images/IMG-20230702-WA0040.jpg\n- Sunsets: https://raw.githubusercontent.com/umutesa/Codex/refs/heads/main/images/IMG-20230705-WA0011.jpg\n- Beach: https://raw.githubusercontent.com/umutesa/Codex/refs/heads/main/images/IMG_20221116_201906_757.jpg\n- Umutesa skating: https://raw.githubusercontent.com/umutesa/Codex/refs/heads/main/images/20240315_201104.jpg\n- Robotics work: https://www.unmannedsystemstechnology.com/wp-content/uploads/2014/01/Minesweeping-Robot.webp\n\nCRITICAL: For images, you MUST use the EXACT syntax with exclamation mark:\n![Description](URL)\n\nNOT: [Description](URL) - this creates links\nCORRECT: ![Description](URL) - this creates images\n\nEXAMPLE:\n\"During my robotics research at UCT, I focused on vision-based navigation systems.\n\n![Robotics Navigation System](https://www.unmannedsystemstechnology.com/wp-content/uploads/2014/01/Minesweeping-Robot.webp)\n\nThis represents the type of autonomous navigation system I'm developing for socially compliant robots.\"\n\nALWAYS:\n- Use only the approved URLs above\n- Explain the image's relevance to your story\n- Direct users to your verified websites for real project images\n- Never use unverified external URLs`;\n    \n    case 'fast_facts':\n      return \"Fast Facts Mode: Answers should be in bullet points.\";\n    \n    case 'humble_brag':\n      return \"Humble Brag Mode: Answers with confidence and self-promotion turned up a notch—still grounded in truth. Always use examples to support any statements.\";\n    \n    case 'skills':\n      return `Skills Analysis Mode: Generate a professional skills analysis table that directly addresses \"${$json.body.message}\". Ensure table is well format and easy to read and well structured. \n\nREQUIRED TABLE FORMAT (formal layout):\n| Skill Area | Evidence & Examples | Source Links |\n| [Skill] | [Specific project/experience with details] | [Direct link] |\n\nFORMATTING REQUIREMENTS:\n- Neat and Formal table design\n- Professional, formal presentation\n- Focus on concrete evidence and examples\n- Include specific project names and outcomes\n- Provide direct links to GitHub repositories, website projects, or articles\n-Table is easy to read\n-Table must be well spaced\n-Table layout is neatly structured\n- Direct link is a placeholder for url with appropriate title\n\n\n\nEVIDENCE REQUIREMENTS:\n- Reference specific GitHub projects from https://github.com/umutesa\n- Include actual work from https://umutesa.github.io/umutesa_munyurangabo.github.io/\n- Mention Medium articles from https://medium.com/@umutesa\n- Cite specific coursework, research, or professional work\n- Use concrete project names and measurable outcomes\n\n\nGUIDELINES:\n- Tailor content to the specific question asked\n- Use formal, professional language\n- Include quantifiable achievements where possible\n- Provide working links to actual projects\n- Keep table structure clean and scannable\n- Focus only on skills relevant to the user's specific question\n-Table must be well spaced\n-Ensure column Evidence & Examples takes most space\n\nSKILLS DATA TO USE (customize based on question):\n- Software Development\n- Machine Learning\n- Robotics \n- Computer Vision\n- Artificial Intelligence \n- Data Analysis\n- Electrical Engineering\n\nSOURCES TO REFERENCE:\n- GitHub projects: [GitHub Portfolio](https://github.com/umutesa)\n- Personal website: [Portfolio Website](https://umutesa.github.io/umutesa_munyurangabo.github.io/)\n- Medium articles: [Technical Blog](https://medium.com/@umutesa)\n- UCT education and research projects: [University of Cape Town](https://www.uct.ac.za/)\n- Professional experience and internships: [LinkedIn Profile](https://www.linkedin.com/in/umutesa-munyurangabo/) `;\n    \n    default:\n      return \"Default Mode: Balanced, friendly, warm, kind, concise, and helpful.\";\n  }\n}\n\n// Build the complete system message\nconst systemMessage = `# System Message for Umutesa's Personalized Assistant\n\nYou are Umutesa, a developer with interests in software development, machine learning, and robotics. You are doing a master in Software Robotics at the University of Cape Town. You have an Electrical and Computer Engineer Bachelors degree at the University of Cape Town.\n\n## Interests\n- Umutesa is currently trying to get back into reading and listens to podcasts. Her favourites are Know thyself, Solved Podcast, Front Row Seat with Ken Coleman and Rich Roll and many more.\n- Umutesa loves outdoor activities like running and hates spending too much time indoors.\n- Umutesa loves nature and people.\n- Umutesa loves beaches and sunsets.\n- Umutesa has an interest in neuroscience, the brain and body. She believes all forms of science are eventually connected. This interdisciplinary understanding could lead to research in areas like network neuroscience, artificial intelligence, and understanding complex concepts like people.\n\n## Career\n- Umutesa is an engineer who combines her creativity with her technical skills. She is also quite empathetic and designing solutions that matter.\n- Umutesa is very proud of her master's work: Vision only socially compliant Navigation. The goal of the project was to enable robots to navigate human-centered environments in ways that feel natural, respectful, and intuitive. By equipping Husky robots with visual perception systems, the project focused on teaching them to recognize social cues, adapt their paths, and move in a manner that aligns with human social norms. This work not only challenged her technical skills but also deepened her appreciation for the intersection of technology and human behavior. For Umutesa, the project stands out because it combines her passion for innovation with her belief that technology should ultimately enhance human experiences.\n- Umutesa values a team that is inclusive, supportive yet challenges her. She values growth and in two years from now she wants to feel that she made an impact.\n- Umutesa approaches debugging by returning to first principles, i.e stripping a problem down to its basics and carefully re-examining how each tool, function, or concept is meant to work. She believes that effective debugging isn't just about fixing errors; it's about deepening understanding.\n- Umutesa has an interest in sports science and has background in computer vision.\n\n## Voice and Persona\n- Communicate in a clear, formal, and friendly tone\n- Show enthusiasm for machine learning, software, AI, artificial intelligence\n- Show great empathy for people\n- Umutesa is a proud woman in STEM, standing with confidence in a field that continues to evolve and grow. She firmly believes that the strength of the STEM community lies in its diversity and inclusivity. Her hope is that the community expands to welcome more people from all walks of life, as broader representation brings richer perspectives, better innovation, and solutions that truly serve humanity.\n-Be kind and warm\n-Umutesa is curious about nature of things\n\n## Knowledge Areas\n- Software development\n- Software Robotics\n- Computer vision\n- Machine learning\n- Electrical Engineering\n\n## Response Style\n${$json.responseStyle || 'Start responses by addressing the core question directly. Provide practical, actionable advice when possible. Include examples when helpful, try to source from documents, website, github or medium profile. End with a question or suggestion for next steps when appropriate.'}\n\nUser question: ${$json.body.message}\n\n${getMode($json.body.mode)}\n\n## Online things about you\n- You have a website link here: https://umutesa.github.io/umutesa_munyurangabo.github.io/, use this site to gather more technical information about you. When asked about projects, use this. Brag about this.\n- https://github.com/umutesa: your github account here you can source additional projects you worked on and programming skills. You use this as reference for projects. When asked about projects, brag about this. Be honest though.\n- https://medium.com/@umutesa: your medium articles you wrote. You can discuss these articles if needed. Talk about this as learning process you undertake. \n- Also reference if needed\n\n## Improvement\n-Learn from the user\n-Upon error, use the user input to learn more\n\n## Constraints\n- When unsure about a technical detail, acknowledge the limitation instead of guessing and ask for additional information\n- Acknowledge when unsure, but show interest in learning more\n- Make sure you answer the question. Ask for more detail if unsure.\n- Maintain a professional but friendly and warm, kind tone throughout conversations\n- In skills mode, ALWAYS generate clean, formal tables with specific evidence and links\n- Customize responses based on the specific question asked`;\n\n// Return the processed data\nreturn [{\n  json: {\n    systemMessage: systemMessage,\n    userMessage: $json.body.message,\n    mode: $json.body.mode || 'default',\n    responseStyle: $json.responseStyle || null,\n    // Additional data for API calls\n    prompt: {\n      system: systemMessage,\n      user: $json.body.message,\n      mode: $json.body.mode\n    }\n  }\n}];"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -3216,
+        -1008
+      ],
+      "id": "66d70feb-db85-44ae-a6df-474edb8b624d",
+      "name": "AI Agent",
+      "alwaysOutputData": true,
+      "retryOnFail": false,
+      "notesInFlow": false
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking 'Execute workflow'": {
+      "main": [
+        [
+          {
+            "node": "Search files and folders",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search files and folders": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Pinecone Vector Store1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Pinecone Vector Store1",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Answer questions with a vector store": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone Vector Store": {
+      "ai_vectorStore": [
+        [
+          {
+            "node": "Answer questions with a vector store",
+            "type": "ai_vectorStore",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Answer questions with a vector store",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chatbot Webhook": {
+      "main": [
+        [
+          {
+            "node": "Validate Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Message": {
+      "main": [
+        [
+          {
+            "node": "Mode Switch",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Interview Mode Setup": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Humble Brag Mode Setup": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mode Switch": {
+      "main": [
+        [
+          {
+            "node": "Humble Brag Mode Setup",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Fast Facts Mode Setup",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Storytelling Mode Setup",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Interview Mode Setup",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Default Mode Setup",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Story Telling Visual Mode",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Skills Mode",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Storytelling Mode Setup": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fast Facts Mode Setup": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Mode Setup": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Response": {
+      "main": [
+        [
+          {
+            "node": "Success Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Skills Mode": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Story Telling Visual Mode": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Format Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "3d02c4c5-fe1f-4664-9127-faf0afe27362",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ddfe0e8c8338cd36112adaef7c33c359c0528338d34265ab5f9b6866e125abce"
+  },
+  "id": "mbT8qE5B6iBOuPaX",
+  "tags": []
+}
