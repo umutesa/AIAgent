@@ -138,6 +138,9 @@ Formatted Response ──┬──▶ Text Display ──▶ Markdown Rendering
 - **Pinecone Account** with vector index
 - **Google Drive API** access
 - **Web Server** for hosting frontend
+- **Node.js** (version 14.x or higher)
+- **npm** (comes with Node.js)
+- **http-server** (install instructions below)
 
 ### API Keys Needed
 ```
@@ -187,27 +190,75 @@ GOOGLE_DRIVE_CREDENTIALS=your_google_credentials
 
 ### Step 2: Frontend Deployment
 
-1. **Update Webhook URL**
+### 1. Clone the Repository
+Clone this repository to your local machine:
+```bash
+git clone https://github.com/umutesa/<repository-name>.git
+cd <repository-name>
+```
+
+---
+
+### 2. Install Dependencies
+Download all required dependencies using `npm`:
+```bash
+npm install
+```
+
+---
+
+### 3. Set Up the `.env` File
+Create a `.env` file in the root directory of the project:
+```bash
+touch .env
+```
+
+Add your AI key and other environment variables to the `.env` file:
+```env
+AI_KEY=your-ai-key-here
+OTHER_ENV_VAR=your-value-here
+```
+
+**Update Webhook URL in index.html : Ensure it is copied from the webhook in the n8n workflow**
    ```javascript
    // In index.html, update:
-   const WEBHOOK_URL = 'https://your-n8n-instance.com/webhook/chat';
+   const WEBHOOK_URL = 'https://umutesa.app.n8n.cloud/webhook/chat'; 
    ```
 
-2. **Deploy to Web Server**
-   ```bash
-   # Option 1: Simple HTTP server
-   python -m http.server 8000
-   
-   # Option 2: Deploy to hosting service
-   # Upload index.html to Netlify, Vercel, or similar
-   ```
+---
 
-3. **Configure Audio Assets** (Optional)
-   ```bash
-   # Create voice/ directory
-   mkdir voice
-   # Add umutesa.mp3 pronunciation file
-   ```
+
+### 4. Configure `.gitignore`
+Ensure that sensitive files like `.env` and other unnecessary files are excluded from version control. Add the following to the `.gitignore` file:
+```
+# Environment variables
+.env
+
+# Node modules
+node_modules/
+
+# Logs
+*.log
+```
+
+---
+
+### 5. Start the HTTP Server
+Install `http-server` globally if you don’t already have it:
+```bash
+npm install -g http-server
+```
+
+Run the project using `http-server`:
+```bash
+http-server
+```
+
+By default, the server will be available at: (once deploy )
+```
+http://localhost:8080
+```
+
 
 ### Step 3: Knowledge Base Setup
 
