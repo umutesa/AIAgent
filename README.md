@@ -4,6 +4,8 @@
 
 umutesacodeX is an intelligent chatbot system that represent Umutesa, featuring multiple conversation modes, vector-based knowledge retrieval, audio processing capabilities, and a modern web interface. The system combines n8n workflow automation with OpenAI's language models and Pinecone vector storage.
 
+![AiAgent Demo](images/demo.gif)
+
 ## Detailed System Architecture
 
 ### Audio Processing Architecture
