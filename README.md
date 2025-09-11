@@ -4,6 +4,41 @@
 
 umutesacodeX is an intelligent chatbot system that represent Umutesa, featuring multiple conversation modes, vector-based knowledge retrieval, audio processing capabilities, and a modern web interface. The system combines n8n workflow automation with OpenAI's language models and Pinecone vector storage.
 
+## Features
+
+### **1. Multi-Modal Conversation Handling**
+- Supports **seven distinct interaction styles** for seamless and intuitive communication.
+- Enables dynamic switching between interaction modes based on user preferences or context.
+
+### **2. Dynamic Knowledge Base**
+- Built with a **RAG (Retrieval-Augmented Generation)**-based context-aware knowledge base.
+- Ensures accurate, up-to-date, and contextually relevant responses.
+
+### **3. Advanced Speech Integration**
+- Fully integrated **speech-to-text** and **text-to-speech** capabilities.
+- Provides natural and expressive audio interactions for enhanced accessibility.
+
+### **4. Responsive Web Interface**
+- Modern and accessible front-end design built using **HTML, CSS, and JavaScript**.
+- Fully responsive layout optimized for both desktop and mobile devices.
+
+### **5. Multi-Input and Multi-Output**
+- **Input Options**:
+  - Text-based input.
+  - Audio-based input (speech recognition).
+- **Output Options**:
+  - **Text**: Clear and concise responses.
+  - **Graphs**: Visual data representation.
+  - **Tables**: Tabular data for structured outputs.
+  - **Images**: Rich media support for context-specific visuals.
+  - **Audio**: Spoken responses with text-to-speech.
+  - **References**: Proper citations alongside generated content.
+
+### **6. Cultural Sensitivity**
+- **Pronunciation Features**:
+  - Handles proper name pronunciation using advanced phonetic algorithms.
+  - Includes localized pronunciation support for diverse cultural contexts.
+
 ![AiAgent Demo](images/demo.gif)
 
 ## Detailed System Architecture
@@ -26,6 +61,7 @@ INPUT AUDIO FLOW:
                    │  Component  │    │ Processing  │    │ (WebKit/Web)│
                    └─────────────┘    └─────────────┘    └─────────────┘
 
+
 OUTPUT AUDIO FLOW:
 ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
 │ AI Response │───▶│   Text      │───▶│  Browser    │───▶│   Audio     │
@@ -36,6 +72,7 @@ OUTPUT AUDIO FLOW:
                    │ User Audio  │◀───│   Voice     │◀───│  Speech     │
                    │ Experience  │    │ Controls    │    │ Synthesis   │
                    └─────────────┘    └─────────────┘    └─────────────┘
+
 
 PRONUNCIATION SYSTEM:
 ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
@@ -49,18 +86,19 @@ PRONUNCIATION SYSTEM:
 
 ```
 REQUEST FLOW:
-Client ──┬──▶ STT Processing ──┬──▶ Input Validation ──▶ Mode Routing
+Client ──┬──▶ STT Processing (Speech to text )  ──┬──▶ Input Validation ──▶ Mode Routing
          │                    │
          └──▶ Text Input ──────┘
 
 MODE PROCESSING:
-Mode Router ──▶ Prompt Template ──▶ Context Injection ──▶ AI Agent
+Mode Router ──▶ Prompt Template ──▶ Context Processing ──▶ AI Agent
 
 KNOWLEDGE RETRIEVAL:
 User Query ──▶ Embedding Generation ──▶ Vector Search ──▶ Context Retrieval
                       │                       │                  │
                       ▼                       ▼                  ▼
               OpenAI Embeddings         Pinecone Index     Top-K Results
+
 
 AI PROCESSING:
 Context + Query ──▶ LLM Processing ──▶ Response Generation ──▶ Output Formatting
@@ -103,10 +141,10 @@ Formatted Response ──┬──▶ Text Display ──▶ Markdown Rendering
 ## Core Components
 
 ### 1. Frontend Interface (`index.html`)
-- **Modern Chat UI**: Clean, responsive design with message bubbles
+- **Modern Chat UI**: Clean, responsive design 
 - **Mode Selection**: 7 different conversation modes
 - **Voice Features**: Speech-to-text input and text-to-speech output
-- **Markdown Support**: Rich text rendering with tables, images, code blocks
+- **Markdown Support**: Rich text rendering with tables, images, and Audio
 - **Real-time Status**: Connection and processing status indicators
 
 ### 2. n8n Workflow Engine (`umutesacodeX.json`)
@@ -131,6 +169,8 @@ Formatted Response ──┬──▶ Text Display ──▶ Markdown Rendering
 | **Fast Facts** | Quick, bullet-point format | Rapid information delivery |
 | **Humble Brag** | Confident self-promotion | Showcasing achievements |
 | **Skills** | Professional analysis tables | Technical skill assessment |
+
+
 
 ## Prerequisites
 
@@ -157,6 +197,8 @@ GOOGLE_DRIVE_CREDENTIALS=your_google_credentials
 
 1. **Import Workflow**
    ```bash
+   download n8n-workflows/umutesaCodeX.json script from the repositiory
+   
    # In n8n interface
    1. Go to Workflows
    2. Click "Import from file"
@@ -187,7 +229,7 @@ GOOGLE_DRIVE_CREDENTIALS=your_google_credentials
 4. **Set Google Drive Folder**
    ```bash
    # Update folder ID in workflow:
-   folderId: "1NtYJfbKmZCoAi4bfwIMvoGnLK4DqUOZ6"
+   folderId: "FoderID"
    ```
 
 ### Step 2: Frontend Deployment
